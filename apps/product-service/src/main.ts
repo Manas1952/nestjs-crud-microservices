@@ -19,8 +19,8 @@ async function bootstrap() {
   app.connectMicroservice<MicroserviceOptions>({
     transport: Transport.TCP,
     options: {
-      host: '127.0.0.1',
-      port: 3002,
+      host: '0.0.0.0',
+      port: 3003,
     },
   });
 
@@ -30,14 +30,14 @@ async function bootstrap() {
   app.connectMicroservice<MicroserviceOptions>({
     transport: Transport.RMQ,
     options: {
-      urls: ['amqp://localhost:5672'],
+      urls: ['amqp://rabbitmq:5672'],
       queue: 'my_queue',
       queueOptions: { durable: true },
     },
   });
 
   await app.startAllMicroservices();
-  await app.listen(3000); // optional HTTP port
+  await app.listen(3002); // optional HTTP port
 
 }
 bootstrap();

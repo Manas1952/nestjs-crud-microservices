@@ -1,4 +1,4 @@
-import { All, Body, Controller, Get, Param, Req } from '@nestjs/common';
+import { All, Body, Controller, Delete, Get, Param, Put, Req } from '@nestjs/common';
 import { ApiGatewayService } from './api-gateway.service';
 
 @Controller('api')
@@ -23,9 +23,14 @@ export class ApiGatewayController {
     return this.apiGatewayService.callProductService1(request.method, body);
   }
   
-  @All("products/:id")
-  product(@Param('id') id: string, @Req() req: Request, @Body() body: any) {
-    return this.apiGatewayService.callProductService2(req.method, id, body);
+  @Delete("products/:id")
+  product(@Param('id') id: string, @Req() req: Request) {
+    return this.apiGatewayService.callProductService2(req.method, { id, stock: null });
+  }
+  
+  @Put("products/:id/:stock")
+  updateStock(@Param('id') id: string, @Param('stock') stock: number, @Req() req: Request) {
+    return this.apiGatewayService.callProductService2(req.method, { id, stock });
   }
   
   @Get()

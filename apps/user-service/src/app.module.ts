@@ -7,10 +7,10 @@ import { UserModule } from './user/user.module';
     TypeOrmModule.forRoot({
       type: 'postgres',
       host: 'localhost',
-      port: 5432,
+      port: 5433,
       username: 'postgres',
-      password: 'root',
-      database: 'postgres',
+      password: 'postgres',
+      database: 'userdb',
       entities: ['src/**/*.entity.{ts,js}'],
       synchronize: true,
       autoLoadEntities: true,

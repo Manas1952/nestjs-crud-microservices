@@ -18,15 +18,11 @@ export class ProductServiceService {
     return this.productRepo.save(product);
   }
 
-  findOne(id: number) {
-    return this.productRepo.findOne({ where: { id } });
-  }
-
   findAll() {
     return this.productRepo.find();
   }
 
-  update(id: number, stock: number) {
+  updateStock(id: number, stock: number) {
     return this.productRepo.update(id, { stock });
   }
 

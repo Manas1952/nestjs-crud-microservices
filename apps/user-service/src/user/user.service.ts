@@ -7,12 +7,14 @@ import { rabbitMQConfig } from 'rabbitmq.options';
 
 @Injectable()
 export class UserService {
+  private readonly rmqClient: ClientProxy
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
-    @Inject('RMQ_CLIENT')
-    private readonly rmqClient: ClientProxy
-  ) {}
+    // @Inject('RMQ_CLIENT')
+  ) {
+    this.rmqClient = ClientProxyFactory.create(rabbitMQConfig());
+  }
 
   create(user: Partial<User>) {
     return this.userRepository.save(user);
@@ -20,7 +22,7 @@ export class UserService {
 
   findAll() {
     console.log("getUsers");
-    this.rmqClient.send({ cmd: 'GETTING_USERS' }, { 'key': 'value' });
+    this.rmqClient.emit('GETTING_USERS', { 'key': 'value' });
     return this.userRepository.find();
   }
 

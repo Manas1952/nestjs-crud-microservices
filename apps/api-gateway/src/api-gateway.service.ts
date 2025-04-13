@@ -43,10 +43,10 @@ export class ApiGatewayService {
       );
   }
 
-  callProductService2(cmd: string, id: string, user: any) {
+  callProductService2(cmd: string, payload: any) {
     const pattern = { cmd };
     return this.clientServiceB
-      .send(pattern, { id, user })
+      .send(pattern, payload)
       .pipe(
         map((response: string) => ({ response, }))
       );

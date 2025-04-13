@@ -12,8 +12,8 @@ export class ProductServiceController {
     }
   
     @MessagePattern({ cmd: "PUT" })
-    update(body: any) {
-      return this.productService.update(Number(body.id), body.user);
+    updateStock(body: any) {
+      return this.productService.updateStock(Number(body.id), Number(body.stock));
     }
   
     @MessagePattern({ cmd: "DELETE" })
@@ -22,10 +22,7 @@ export class ProductServiceController {
     }
   
     @MessagePattern({ cmd: "GET" })
-    getUsers(body: any) {
-      if (body.id) {
-        return this.productService.findOne(Number(body.id));
-      }
+    getUsers() {
       return this.productService.findAll();
       // return of("pong"); ??
     }

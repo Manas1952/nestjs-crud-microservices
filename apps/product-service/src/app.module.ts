@@ -6,11 +6,11 @@ import { ProductServiceModule } from './product-service.module';
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'localhost',
+      host: 'postgres-product',
       port: 5432, // Or 5433 if using Docker
       username: 'postgres',
-      password: 'root',
-      database: 'postgres',
+      password: 'postgres',
+      database: 'productdb',
       entities: ['src/**/*.entity.{ts,js}'],
       autoLoadEntities: true,
       synchronize: true,
