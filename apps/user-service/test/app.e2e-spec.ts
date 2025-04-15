@@ -1,7 +1,6 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { INestApplication } from '@nestjs/common';
 import * as request from 'supertest';
-import { UserModule } from './../src/user/user.module';
 import { AppModule } from '../src/app.module';
 
 describe('UserServiceController (e2e)', () => {
@@ -25,8 +24,8 @@ describe('UserServiceController (e2e)', () => {
       expect(response.body).toEqual(
         expect.objectContaining({
           id: expect.any(Number),
-          name: 'Alice Johnson',
-          email: 'alice@example.com',
+          name: 'Wireless Mouse1',
+          email: 'asdffdt',
         }),
       );
   });

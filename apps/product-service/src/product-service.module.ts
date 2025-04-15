@@ -15,7 +15,6 @@ import { rabbitMQConfig } from 'rabbitmq.options';
         ...rabbitMQConfig()
       },
     ]),
-
   ],
   controllers: [ProductServiceController],
   providers: [ProductServiceService],

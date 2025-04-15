@@ -6,8 +6,8 @@ import { ProductServiceModule } from './product-service.module';
   imports: [
     TypeOrmModule.forRoot({
       type: 'postgres',
-      host: 'postgres-product',
-      port: 5432, // Or 5433 if using Docker
+      host: 'postgres-server',
+      port: 5432,
       username: 'postgres',
       password: 'postgres',
       database: 'productdb',

@@ -1,28 +1,17 @@
 version: '3.8'
 services:
-  # postgres-user:
-  #   image: postgres
-  #   container_name: postgres-user
-  #   environment:
-  #     POSTGRES_USER: postgres
-  #     POSTGRES_PASSWORD: postgres
-  #     POSTGRES_DB: userdb
-  #   ports:
-  #     - "5433:5432"
-  #   volumes:
-  #     - user_data:/var/lib/postgresql/data
 
-  postgres-product:
+  postgres-server:
     image: postgres
-    container_name: postgres-product
+    container_name: postgres-server
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: productdb
     ports:
-      - "5434:5432"
+      - "5432:5432"
     volumes:
-      - product_data:/var/lib/postgresql/data
+      - pg_data:/var/lib/postgresql/data
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
 
   rabbitmq:
     image: rabbitmq:3-management
@@ -38,23 +27,23 @@ services:
     ports:
       - "3000:3000"
     depends_on:
-      # - user-service
+      - user-service
       - product-service
       - rabbitmq
     environment:
       - NODE_ENV=development
 
-  # user-service:
-  #   build:
-  #     context: .
-  #     dockerfile: ./apps/user-service/Dockerfile
-  #   ports:
-  #     - "3001:3001"
-  #   depends_on:
-  #     - postgres-user
-  #     - rabbitmq
-  #   environment:
-  #     - NODE_ENV=development
+  user-service:
+    build:
+      context: .
+      dockerfile: ./apps/user-service/Dockerfile
+    ports:
+      - "3001:3001"
+    depends_on:
+      - postgres-server
+      - rabbitmq
+    environment:
+      - NODE_ENV=development
 
   product-service:
     build:
@@ -63,11 +52,10 @@ services:
     ports:
       - "3002:3002"
     depends_on:
-      - postgres-product
+      - postgres-server
       - rabbitmq
     environment:
       - NODE_ENV=development
 
 volumes:
-  # user_data:
-  product_data:
+  pg_data:

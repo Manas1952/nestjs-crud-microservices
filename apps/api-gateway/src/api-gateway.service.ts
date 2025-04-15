@@ -1,5 +1,5 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { ClientProxy, ClientProxyFactory } from "@nestjs/microservices";
+import { ClientProxy } from "@nestjs/microservices";
 import { map } from 'rxjs';
 
 @Injectable()
