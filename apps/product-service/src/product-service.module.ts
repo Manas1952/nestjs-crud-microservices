@@ -4,7 +4,7 @@ import { ProductServiceService } from './product-service.service';
 import { Product } from './product-service.entity';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ClientsModule } from '@nestjs/microservices';
-import { rabbitMQConfig } from 'rabbitmq.options';
+import { rabbitMQConfig } from '../../../rabbitmq.options';
 
 @Module({
   imports: [

@@ -1,6 +1,6 @@
 # apps/api-gateway/Dockerfile
 
-FROM node:18-alpine
+FROM node:23-alpine
 
 WORKDIR /app
 

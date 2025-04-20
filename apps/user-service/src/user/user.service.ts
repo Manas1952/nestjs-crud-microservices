@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { User } from './user.entity';
 import { ClientProxy, ClientProxyFactory } from '@nestjs/microservices';
-import { rabbitMQConfig } from 'rabbitmq.options';
+import { rabbitMQConfig } from '../../../../rabbitmq.options';
 
 @Injectable()
 export class UserService {
@@ -21,7 +21,6 @@ export class UserService {
   }
 
   findAll() {
-    console.log("getUsers");
     this.rmqClient.emit('GETTING_USERS', { 'key': 'value' });
     return this.userRepository.find();
   }
