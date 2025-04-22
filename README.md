@@ -30,6 +30,12 @@
 ```bash
 $ npm install
 ```
+Make sure no process is running at ports: `3000`, `3001`, `3002`, `3003`
+
+## Set up environment variables
+
+- Create `.env` and `.env.test` file in the root of each service.
+- `.env.sample` is already created for the reference.
 
 ## Compile and run the project
 
@@ -41,7 +47,9 @@ $ docker-compose up --build -d
 ## Run tests
 
 ```bash
-# unit tests
+# tests
+$ docker-compose -f docker-compose.test.yml up --build -d
+
 $ npm run test product-service
 $ npm run test user-service
 
